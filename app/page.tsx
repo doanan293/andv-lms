@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/themeToggle";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
@@ -8,9 +9,11 @@ export default async function Home() {
     headers: await headers(),
   });
   return (
-    <div>
+    <div className="p-24">
       <h1 className="text-2xl font-bold text-red-500">Hello World</h1>
+
       <ThemeToggle />
+      {session ? <p>{session.user.name}</p> : <Button>Logout</Button>}
     </div>
   );
 }
