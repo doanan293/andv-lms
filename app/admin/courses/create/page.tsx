@@ -9,10 +9,12 @@ import {
 } from "@/components/ui/card";
 import {
   courseCategories,
+  courseLevels,
   courseSchema,
   CourseSchemaType,
+  courseStatus,
 } from "@/lib/zodSchemas";
-import { ArrowLeft, SparkleIcon } from "lucide-react";
+import { ArrowLeft, PlusIcon, SparkleIcon } from "lucide-react";
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -33,6 +35,7 @@ import {
   SelectTrigger,
 } from "@/components/ui/select";
 import { SelectValue } from "@radix-ui/react-select";
+import { RichTextEditor } from "@/components/rich-text-editor/Editor";
 
 export default function CourseCreationPage() {
   //Define your form
@@ -89,7 +92,7 @@ export default function CourseCreationPage() {
                     </FormControl>
                   </FormItem>
                 )}
-              ></FormField>
+              />
               <div className="flex gap-4 items-end">
                 <FormField
                   control={form.control}
@@ -102,7 +105,7 @@ export default function CourseCreationPage() {
                       </FormControl>
                     </FormItem>
                   )}
-                ></FormField>
+                />
                 <Button
                   type="button"
                   className="w-fit"
@@ -130,7 +133,7 @@ export default function CourseCreationPage() {
                     </FormControl>
                   </FormItem>
                 )}
-              ></FormField>
+              />
               <FormField
                 control={form.control}
                 name="description"
@@ -138,15 +141,16 @@ export default function CourseCreationPage() {
                   <FormItem className="w-full">
                     <FormLabel>Description</FormLabel>
                     <FormControl>
-                      <Textarea
+                      <RichTextEditor />
+                      {/* <Textarea
                         placeholder="Description"
                         className="min-h-[120px]"
                         {...field}
-                      />
+                      /> */}
                     </FormControl>
                   </FormItem>
                 )}
-              ></FormField>
+              />
               <FormField
                 control={form.control}
                 name="fileKey"
@@ -158,7 +162,7 @@ export default function CourseCreationPage() {
                     </FormControl>
                   </FormItem>
                 )}
-              ></FormField>
+              />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
@@ -185,8 +189,95 @@ export default function CourseCreationPage() {
                       </Select>
                     </FormItem>
                   )}
-                ></FormField>
+                />
+                <FormField
+                  control={form.control}
+                  name="level"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>Level</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select Level" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {courseLevels.map((category) => (
+                            <SelectItem key={category} value={category}>
+                              {category}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="duration"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>Duration (hours)</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Duration"
+                          type="number"
+                          {...field}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="price"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>Price ($)</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Price ($)"
+                          type="number"
+                          {...field}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
               </div>
+              <FormField
+                control={form.control}
+                name="status"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Status</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select Status" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {courseStatus.map((category) => (
+                          <SelectItem key={category} value={category}>
+                            {category}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
+              <Button>
+                Create Course <PlusIcon className="ml-1" size={16} />
+              </Button>
             </form>
           </Form>
         </CardContent>
