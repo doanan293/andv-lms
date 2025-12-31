@@ -66,7 +66,11 @@ export function RenderUploadedState({
         onClick={handleRemoveFile}
         disabled={isDeleting}
       >
-        {isDeleting ? (<Loader2 className="size-4 animate-spin" />) : (<XIcon className="size-4" />)}
+        {isDeleting ? (
+          <Loader2 className="size-4 animate-spin" />
+        ) : (
+          <XIcon className="size-4" />
+        )}
       </Button>
     </div>
   );
