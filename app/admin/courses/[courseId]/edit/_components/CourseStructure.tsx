@@ -70,8 +70,6 @@ export function CourseStructure({ data }: iAppProps) {
 
   const [items, setItems] = useState(initialItems);
 
-  console.log("CourseStructure items:", items);
-
   useEffect(() => {
     setItems((prevIems) => {
       const updatedItems =
@@ -139,7 +137,6 @@ export function CourseStructure({ data }: iAppProps) {
       } else if (overType === "lesson") {
         targetChapterId = over.data.current?.chapterId ?? null;
       }
-      console.log("targetChapterId:", targetChapterId);
       if (!targetChapterId) {
         toast.error("Could not determine the chapter for reorderring");
         return;
