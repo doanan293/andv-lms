@@ -32,13 +32,15 @@ import {
   ChevronRight,
   FileText,
   GripVertical,
-  Trash2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { toast } from "sonner";
 import { reorderChapters, reorderLessons } from "../action";
 import { NewChapterModal } from "./NewChapterModal";
+import { NewLessonModal } from "./NewLessonModal";
+import { DeleteLesson } from "./DeleteLesson";
+import { DeleteChapter } from "./DeleteChapter";
 
 interface iAppProps {
   data: AdminCourseSingularType;
@@ -335,9 +337,7 @@ export function CourseStructure({ data }: iAppProps) {
                             {item.title}
                           </p>
                         </div>
-                        <Button size="icon" variant="outline">
-                          <Trash2 className="size-4" />
-                        </Button>
+                        <DeleteChapter chapterId={item.id} courseId={data.id} />
                       </div>
                       <CollapsibleContent>
                         <div className="p-1">
@@ -368,18 +368,21 @@ export function CourseStructure({ data }: iAppProps) {
                                         {lesson.title}
                                       </Link>
                                     </div>
-                                    <Button variant="outline" size="icon">
-                                      <Trash2 className="size-4" />
-                                    </Button>
+                                    <DeleteLesson
+                                      chapterId={item.id}
+                                      courseId={data.id}
+                                      lessonId={lesson.id}
+                                    />
                                   </div>
                                 )}
                               </SortableItem>
                             ))}
                           </SortableContext>
                           <div className="p-2">
-                            <Button className="w-full" variant="outline">
-                              Create New Lesson
-                            </Button>
+                            <NewLessonModal
+                              chapterId={item.id}
+                              courseId={data.id}
+                            />
                           </div>
                         </div>
                       </CollapsibleContent>

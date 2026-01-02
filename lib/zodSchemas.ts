@@ -67,8 +67,8 @@ export const lessonSchema = z.object({
     .string()
     .min(3, { message: "Description must be at least 3 characters long" })
     .optional(),
+  videoKey: z.string().optional(),
   thumbnailKey: z.string().optional(),
-  videoFileKey: z.string().min(1, { message: "Video file is required" }),
 });
 
 export type CourseSchemaType = z.infer<typeof courseSchema>;
