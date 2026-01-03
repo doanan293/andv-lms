@@ -27,7 +27,7 @@ export function PublicCourseCard({ data }: iAppProps) {
       <CardContent className="p-4">
         <Link
           className="font-medium text-lg line-clamp-2 hover:underline group-hover:text-primary transition-colors"
-          href={`/course/${data.slug}`}
+          href={`/courses/${data.slug}`}
         >
           {data.title}
         </Link>
@@ -45,7 +45,7 @@ export function PublicCourseCard({ data }: iAppProps) {
           </div>
         </div>
         <Link
-          href={`/course/${data.slug}`}
+          href={`/courses/${data.slug}`}
           className={buttonVariants({ className: "w-full mt-4" })}
         >
           Learn More
